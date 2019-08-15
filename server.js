@@ -6,7 +6,7 @@ const server = express();
 server.use(helmet());
 server.use(express.json());
 
-/////recipes//////
+////////////////////recipes//////////////////////
 
 // get all recipes from the database
 server.get('/api/recipes', async (req, res) => {
@@ -49,10 +49,10 @@ server.delete('/api/recipes/:id', async (req, res) => {
   }
 });
 
-/////recipes//////
+////////////////////////////recipes////////////////////////
 
 
-/////Ingredients/////
+//////////////////////////Ingredients//////////////////////
 
   // get all ingredients from the database
 server.get('/api/ingredients', async (req, res) => {
@@ -95,5 +95,7 @@ server.delete('/api/ingredients/:id', async (req, res) => {
     res.status(500).json(error);
   }
 });
+//////////////////////////Ingredients//////////////////////
+
 
 module.exports = server;
