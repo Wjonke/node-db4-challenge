@@ -6,57 +6,90 @@ const server = express();
 server.use(helmet());
 server.use(express.json());
 
+/////recipes//////
 
-
-server.get('/api/species', async (req, res) => {
-  // get all species from the database
+// get all recipes from the database
+server.get('/api/recipes', async (req, res) => {
   try {
-    const species = await db('species'); 
-    res.status(200).json(species);
+    const recipes = await db('recipes'); 
+    res.status(200).json(recipes);
   } catch (error) {
     res.status(500).json(error);
   }
 });
 
-server.get('/api/animals', async (req, res) => {
-  // get all animals from the database
+// create recipe
+server.post('/api/recipes', async (req, res) => {
   try {
-    // include species name
-    const animals = await db('animals')
-    .leftJoin('species', 'species.id', 'species_id'); 
+    const [id] = await db('recipes').insert(req.body);
 
-    res.status(200).json(animals);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-});
-
-// create animal
-server.post('/api/animals', async (req, res) => {
-  try {
-    const [id] = await db('animals').insert(req.body);
-
-    const animal = await db('animals')
+    const recipe = await db('recipes')
       .where({ id })
       .first();
-
-    res.status(201).json(animal);
+    res.status(201).json(recipe);
   } catch (error) {
     res.status(500).json(error);
   }
 });
 
-// remove species
-server.delete('/api/species/:id', async (req, res) => {
+// remove recipes
+server.delete('/api/recipes/:id', async (req, res) => {
   try {
-    const count = await db('species')
+    const count = await db('recipes')
       .where({ id: req.params.id })
       .del();
 
     if (count > 0) {
       res.status(204).end();
     } else {
-      res.status(404).json({ message: 'Record not found' });
+      res.status(404).json({ message: 'Recipe not found' });
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+/////recipes//////
+
+
+/////Ingredients/////
+
+  // get all ingredients from the database
+server.get('/api/ingredients', async (req, res) => {
+  try {
+
+    const ingredients = await db('ingredients') 
+    res.status(200).json(ingredients);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+// create ingredient
+server.post('/api/ingredients', async (req, res) => {
+  try {
+    const [id] = await db('ingredients').insert(req.body);
+
+    const ingredient = await db('ingredients')
+      .where({ id })
+      .first();
+    res.status(201).json(ingredient);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+// remove ingredient
+server.delete('/api/ingredients/:id', async (req, res) => {
+  try {
+    const count = await db('ingredients')
+      .where({ id: req.params.id })
+      .del();
+
+    if (count > 0) {
+      res.status(204).end();
+    } else {
+      res.status(404).json({ message: 'Ingredient not found' });
     }
   } catch (error) {
     res.status(500).json(error);
