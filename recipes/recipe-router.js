@@ -1,5 +1,5 @@
 const express = require('express');
-const Recipes = require('./recipe-modal');
+const Recipes = require('./recipe-model');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -16,14 +16,23 @@ router.post('/', (req, res) => {
   .catch(err => {res.status(500).json(err)})
 })
   
-router.update(
-  
-)
-    
-router.delete(
-  
-)
-      
+
+router.put('/:id', (req, res) => {
+  const changes = req.body
+  const {id} = req.params
+  Recipes.updateRecipe(changes, id)
+  .then(recipe => {res.status(200).json(recipe)})
+  .catch(err => {res.status(500).json(err)})
+})
+
+
+router.delete('/:id', (req, res) => {
+const { id } = req.params;
+Recipes.deleteRecipe(id)
+  .then(recipe => {res.status(200).json(recipe)})
+  .catch(err => {res.status(500).json(err)})
+})
+
 
 
 module.exports = router

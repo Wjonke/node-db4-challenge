@@ -12,24 +12,25 @@ module.exports = {
 
 function getRecipes(){
   return db('recipes')
-
 }
 
-function deleteRecipe(){
-  return db('recipes')
 
-}
 function addRecipe(){
   return db('recipes')
-
+  .insert(newRecipe, 'id')
 }
+
 function updateRecipe(){
   return db('recipes')
     .update(changes)
     .where({ id })
 }
 
-
+function deleteRecipe(){
+  return db('recipes')
+  .where({ id })
+  .del();
+}
 
 
 
