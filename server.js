@@ -3,8 +3,28 @@ const helmet = require('helmet');
 const db = require('./data/db-config.js');
 const server = express();
 
+const RecipeRouter = require('./recipes/recipe-router')
+const IngredientsRouter = require('./ingredients/ingredients-router')
+
 server.use(helmet());
 server.use(express.json());
+
+server.use ('/api/recipes', RecipeRouter)
+server.use ('/api/ingredients', IngredientsRouter)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ////////////////////recipes//////////////////////
 
