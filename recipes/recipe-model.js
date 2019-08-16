@@ -15,9 +15,9 @@ function getRecipes(){
 }
 
 
-function addRecipe(){
+function addRecipe(recipes){
   return db('recipes')
-  .insert(newRecipe, 'id')
+  .insert(recipes, 'id')
 }
 
 function updateRecipe(){
@@ -32,14 +32,18 @@ function deleteRecipe(){
   .del();
 }
 
-
-
-function getShoppingList(){
-  return db('')
-
+function getShoppingList(id) {
+  return db("recipes as r")
+  .innerJoin("recipes_ingredients as ri", "r.id", "=", "ri.recipe_id")
+  .innerJoin("ingredients as i", "i.id", "=", "ri.ingredients_id")
+  .select("r.name", "i.name", "ri.quantity")
+  .where({ "r.id" : id })
 }
 
-function getInstructions(){
-  return db('')
 
+function getInstructions(id) {
+  return db("recipes")
+  .select("recipes.steps")
+  .where({ id })
 }
+

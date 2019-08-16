@@ -1,5 +1,10 @@
+//make relevant to the ingredients schema
+
+// id	              integer	  
+// name	            varchar(255)
+
 exports.seed = function(knex, Promise) {
-  return knex('species').insert(
+  return knex('ingredients').insert(
     [
       {
         "name": "Fuscia"
@@ -8,7 +13,7 @@ exports.seed = function(knex, Promise) {
         "name": "Teal"
       }, 
       {
-        "name": "Teal"
+        "name": "Purple"
       }, 
       {
         "name": "Goldenrod"
@@ -17,55 +22,20 @@ exports.seed = function(knex, Promise) {
         "name": "Turquoise"
       }, 
       {
-        "name": "Purple"
+        "name": "Orange"
       }, 
       {
-        "name": "Turquoise"
+        "name": "Skyblue"
       }, 
       {
         "name": "Red"
       }, 
       {
         "name": "Aquamarine"
-      }, 
-      {
-        "name": "Maroon"
-      }, 
-      {
-        "name": "Blue"
-      }, 
-      {
-        "name": "Puce"
-      }, 
-      {
-        "name": "Aquamarine"
-      }, 
-      {
-        "name": "Mauv"
-      }, 
-      {
-        "name": "Aquamarine"
-      }, 
-      {
-        "name": "Maroon"
-      }, 
-      {
-        "name": "Fuscia"
-      }, 
-      {
-        "name": "Goldenrod"
-      }, 
-      {
-        "name": "Puce"
-      }, 
-      {
-        "name": "Puce"
       }
+      
     ]
   );
 };
 
-//make relevant to the ingredients schema
 
-// id	              integer	  
-// name	            varchar(255)

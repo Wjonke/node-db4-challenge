@@ -13,7 +13,7 @@ function getIngredients(){
   return db('ingredients')
 }
 
-function addIngredient(){
+function addIngredient(ingredient){
   return db('ingredients')
   .insert(ingredient, 'id')
 }
