@@ -18,19 +18,16 @@ exports.up = function(knex) {
         .string('name', 255)
         .notNullable()
         .unique();
-      tbl
-        .float('quantity', 255)
-        .notNullable()
-        
-      tbl
-        .float('unit_of_measure', 255)
-        .notNullable();
+      
     })
 
 
     .createTable('recipes_ingredients', tbl => {
       tbl.increments();
-
+      tbl
+        .float('quantity', 255)
+        .notNullable()
+      
       tbl
         .integer('recipe_id')
         .unsigned()
@@ -38,7 +35,7 @@ exports.up = function(knex) {
         .references('id')
         .inTable('recipes')
         .onDelete('RESTRICT')
-        .onUpdate('CASCADE'); // if the PK on primary table changes, what to do?
+        .onUpdate('CASCADE'); 
       tbl
         .integer('ingredients_id')
         .unsigned()
@@ -46,13 +43,9 @@ exports.up = function(knex) {
         .references('id')
         .inTable('ingredients')
         .onDelete('RESTRICT')
-        .onUpdate('CASCADE'); // if the PK on primary table changes, what to do?
+        .onUpdate('CASCADE'); 
     });
 };
-
-
-
-
 
 exports.down = function(knex) {
   return knex.schema
